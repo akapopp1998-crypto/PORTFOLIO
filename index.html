@@ -267,31 +267,47 @@
       color: var(--text-secondary);
     }
 
-    /* Key Metrics Strip */
+    /* Key Metrics Strip (4 Columns + Behavior) */
     .metrics-strip {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
       padding: 28px 0 48px;
       border-top: 1px solid var(--border);
     }
 
     .metric-box {
       text-align: center;
-      padding: 12px;
+      padding: 18px 14px;
+      border-radius: 18px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.25s ease,
+                  border-color 0.25s ease,
+                  box-shadow 0.25s ease;
+    }
+
+    .metric-box:hover {
+      transform: translateY(-4px);
+      background: var(--bg-alt);
+      border-color: var(--border);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
     }
 
     .metric-num {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.5rem, 2.8vw, 2.05rem);
       font-weight: 700;
       letter-spacing: -0.03em;
       color: var(--text);
+      font-variant-numeric: tabular-nums;
     }
 
     .metric-label {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
-      margin-top: 4px;
+      margin-top: 6px;
+      line-height: 1.5;
     }
 
     /* Tech Stack Logo Showcase */
@@ -707,7 +723,7 @@
       .hero { grid-template-columns: 1fr; padding: 48px 0 40px; gap: 28px; }
       .photo-wrapper { order: -1; }
       .photo-frame { max-width: 210px; }
-      .metrics-strip { grid-template-columns: 1fr; gap: 8px; }
+      .metrics-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .arch-flow { grid-template-columns: 1fr; }
       .arch-arrow { transform: rotate(90deg); }
@@ -752,7 +768,7 @@
             และ Cloud Infrastructure รองรับผู้ใช้งานระดับองค์กรมากกว่า 200+ Users
             ควบคู่กับการวางระบบความมั่นคงปลอดภัยสารสนเทศตามมาตรฐาน ISO/IEC 27001:2022,
             Safetica DLP, PDPA และการเตรียมระบบรองรับการตรวจสอบ IT Audit (EY, IA, FA)
-            รวมถึงการบริหารงบประมาณไอทีประจำปี
+            รวมถึงการบริหารงบประมาณไอทีประจำปี (CAPEX/OPEX)
           </p>
           <div class="actions">
             <a href="#projects" class="btn-primary">ดูผลงานและ Case Study</a>
@@ -769,14 +785,18 @@
       </section>
 
       <!-- Key Metrics -->
-      <div class="metrics-strip reveal">
+      <div class="metrics-strip reveal" id="metricsStrip">
         <div class="metric-box">
-          <div class="metric-num">7+ ปี</div>
+          <div class="metric-num" data-target="7" data-suffix="+ ปี">0+ ปี</div>
           <div class="metric-label">ประสบการณ์ IT Infrastructure &amp; Security</div>
         </div>
         <div class="metric-box">
-          <div class="metric-num">200+ Users</div>
+          <div class="metric-num" data-target="200" data-suffix="+ Users">0+ Users</div>
           <div class="metric-label">บริหารโครงสร้างพื้นฐานและระบบความปลอดภัยองค์กร</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-num" data-target="99.9" data-decimals="1" data-suffix="%">0.0%</div>
+          <div class="metric-label">System Uptime และความพร้อมใช้งานระบบหลัก</div>
         </div>
         <div class="metric-box">
           <div class="metric-num">ISO 27001</div>
@@ -1179,7 +1199,38 @@
 
     revealEls.forEach((el) => revealObserver.observe(el));
 
-    // 4. Active Navbar Highlight
+    // 4. Number Count-up Animation for Metrics Strip
+    const metricsStrip = document.getElementById("metricsStrip");
+    let metricsAnimated = false;
+
+    const metricsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !metricsAnimated) {
+          metricsAnimated = true;
+          document.querySelectorAll(".metric-num[data-target]").forEach((el) => {
+            const target = parseFloat(el.getAttribute("data-target"));
+            const decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+            const suffix = el.getAttribute("data-suffix") || "";
+            const duration = 1200;
+            const startTime = performance.now();
+
+            function updateCounter(now) {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const current = (target * easeOut).toFixed(decimals);
+              el.textContent = current + suffix;
+              if (progress < 1) requestAnimationFrame(updateCounter);
+            }
+            requestAnimationFrame(updateCounter);
+          });
+          metricsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (metricsStrip) metricsObserver.observe(metricsStrip);
+
+    // 5. Active Navbar Highlight
     const sections = document.querySelectorAll("section[id], div[id='stack'], footer[id='contact']");
     const navItems = document.querySelectorAll("#navLinks a");
 
