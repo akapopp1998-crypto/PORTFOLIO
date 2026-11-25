@@ -272,7 +272,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      padding: 28px 0 48px;
+      padding: 28px 0 36px;
       border-top: 1px solid var(--border);
     }
 
@@ -308,6 +308,109 @@
       color: var(--text-secondary);
       margin-top: 6px;
       line-height: 1.5;
+    }
+
+    /* Live System Status Bar */
+    .live-status-wrap {
+      margin: 0 0 48px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px 20px;
+    }
+
+    .live-status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.78rem;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #28a745;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .live-badge { color: #32d74b; }
+    }
+
+    .live-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34c759;
+      box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.6);
+      animation: liveRing 2s infinite;
+    }
+
+    @keyframes liveRing {
+      0% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.55); }
+      70% { box-shadow: 0 0 0 7px rgba(52, 199, 89, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+    }
+
+    .live-meta {
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .live-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.2s ease;
+    }
+
+    .live-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .live-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .live-item-sub {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .live-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #28a745;
+      background: rgba(52, 199, 89, 0.12);
+      padding: 2px 8px;
+      border-radius: 980px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .live-tag { color: #32d74b; }
     }
 
     /* Tech Stack Logo Showcase */
@@ -724,6 +827,7 @@
       .photo-wrapper { order: -1; }
       .photo-frame { max-width: 210px; }
       .metrics-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .live-grid { grid-template-columns: repeat(2, 1fr); }
       .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .arch-flow { grid-template-columns: 1fr; }
       .arch-arrow { transform: rotate(90deg); }
@@ -760,7 +864,7 @@
     <div class="container">
       <section class="hero reveal">
         <div>
-          <div class="eyebrow"> Recent Position : IT Infrastructure &amp; Information Security</div>
+          <div class="eyebrow">Recent Position : IT Infrastructure &amp; Information Security</div>
           <h1>เอกภพ พุฒทอง</h1>
           <div class="subtitle">Akapop Putthong — IT Infrastructure Engineer</div>
           <p class="summary">
@@ -801,6 +905,47 @@
         <div class="metric-box">
           <div class="metric-num">ISO 27001</div>
           <div class="metric-label">Safetica DLP, PDPA &amp; IT Audit (EY / IA / FA)</div>
+        </div>
+      </div>
+
+      <!-- Live System Status Bar -->
+      <div class="live-status-wrap reveal">
+        <div class="live-status-header">
+          <div class="live-badge">
+            <span class="live-pulse"></span>
+            <span>ALL INFRASTRUCTURE &amp; SECURITY SYSTEMS ONLINE</span>
+          </div>
+          <div class="live-meta">Telemetry: <span id="liveClock">Active</span> · SLA 99.9%</div>
+        </div>
+        <div class="live-grid">
+          <div class="live-item">
+            <div class="live-item-top">
+              <span>Core &amp; SD-WAN</span>
+              <span class="live-tag">Online</span>
+            </div>
+            <div class="live-item-sub">FortiGate · Latency <span id="latNet">4</span> ms</div>
+          </div>
+          <div class="live-item">
+            <div class="live-item-top">
+              <span>Safetica DLP</span>
+              <span class="live-tag">Protected</span>
+            </div>
+            <div class="live-item-sub">PDPA Policy · 200+ Endpoints</div>
+          </div>
+          <div class="live-item">
+            <div class="live-item-top">
+              <span>3-2-1 Backup</span>
+              <span class="live-tag">Synced</span>
+            </div>
+            <div class="live-item-sub">Veeam + Wasabi S3 · Verified</div>
+          </div>
+          <div class="live-item">
+            <div class="live-item-top">
+              <span>Identity &amp; Audit</span>
+              <span class="live-tag">Compliant</span>
+            </div>
+            <div class="live-item-sub">AD / M365 · ISO 27001 / ITGC</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1066,7 +1211,7 @@
               <li>วางระบบและกำหนดนโยบายความปลอดภัยข้อมูล (Safetica DLP, Access Control, Local Admin Restriction, Least Privilege) ตรวจสอบ Log (FortiAnalyzer, Syslog) และจัดทำเอกสารตามมาตรฐาน ISO/IEC 27001:2022, ISMS, PDPA, BCP/DRP รวมถึงรองรับการตรวจสอบ IT Audit (EY / IA / FA)</li>
               <li>ออกแบบ ติดตั้ง และบำรุงรักษาเครือข่าย (Switch, Access Point, Fiber Backbone, VLAN Segmentation) และบริหาร FortiGate NGFW (SD-WAN, Site-to-Site / Remote VPN, Policy, NAT)</li>
               <li>ดูแล Windows Server, Active Directory, VMware/Hyper-V, Storage, Veeam Backup &amp; Replication, Wasabi S3, NAS, Patch Management (WSUS/Intune) และ Microsoft Dynamics 365 Business Central</li>
-              <li>กำหนด SLA/KPIs บริหารทีม IT Support เจรจาต่อรอง Vendor (Bidding) และวางแผน IT Master Plan รวมถึงงบประมาณประจำปี </li>
+              <li>กำหนด SLA/KPIs บริหารทีม IT Support เจรจาต่อรอง Vendor (Bidding) และวางแผน IT Master Plan รวมถึงงบประมาณประจำปี</li>
             </ul>
           </div>
 
@@ -1230,7 +1375,21 @@
 
     if (metricsStrip) metricsObserver.observe(metricsStrip);
 
-    // 5. Active Navbar Highlight
+    // 5. Ambient Live Telemetry Ticker
+    setInterval(() => {
+      const latEl = document.getElementById("latNet");
+      const clockEl = document.getElementById("liveClock");
+      if (latEl) {
+        const ms = Math.floor(Math.random() * 4) + 3;
+        latEl.textContent = ms;
+      }
+      if (clockEl) {
+        const now = new Date();
+        clockEl.textContent = "Heartbeat " + now.toLocaleTimeString("th-TH", { hour12: false });
+      }
+    }, 3000);
+
+    // 6. Active Navbar Highlight
     const sections = document.querySelectorAll("section[id], div[id='stack'], footer[id='contact']");
     const navItems = document.querySelectorAll("#navLinks a");
 
