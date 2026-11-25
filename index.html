@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>เอกภพ พุฒทอง | IT Infrastructure & Security Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #121826;
+      --surface-2: #182032;
+      --text: #e6edf7;
+      --muted: #9aa8bd;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(255, 255, 255, 0.08);
+      --maxw: 1060px;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Sans Thai', 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 40%),
+                  radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.06), transparent 40%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 23, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero + Photo Slot */
+    .hero {
+      padding: 64px 0 44px;
+      display: grid;
+      grid-template-columns: 1.45fr 0.75fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .role-sub {
+      font-size: 1.08rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+
+    .summary {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: 0.2s ease;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #06101c;
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover { filter: brightness(1.08); }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { background: var(--surface-2); }
+
+    /* Photo Frame */
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #162033, #0e1420);
+      border: 1px dashed rgba(154, 168, 189, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .photo-placeholder {
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .photo-caption {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section { padding: 48px 0; }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 22px;
+      border-radius: 4px;
+      background: var(--accent);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card p, .card li {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .card li { margin-bottom: 6px; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: #cbd5e1;
+      border: 1px solid var(--border);
+    }
+
+    /* Timeline */
+    .timeline-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .timeline-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .company {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .role {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .period {
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--surface-2);
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .timeline-item ul {
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .timeline-item li { margin-bottom: 7px; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0 48px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 40px; }
+      .photo-card { max-width: 280px; margin: 0 auto; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        <span>Akapop Putthong</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#projects">ผลงานเด่น</a>
+        <a href="#experience">ประสบการณ์</a>
+        <a href="#skills">ทักษะ</a>
+        <a href="#education">การศึกษา</a>
+        <a href="#contact">ติดต่อ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div>
+        <div class="badge">IT Infrastructure • System, Network &amp; Information Security</div>
+        <h1>เอกภพ พุฒทอง</h1>
+        <div class="role-sub">Akapop Putthong — IT Infrastructure Engineer</div>
+        <p class="summary">
+          มีประสบการณ์ในสายงานไอทีรวม 7 ปี เชี่ยวชาญด้านการออกแบบและบริหารจัดการโครงสร้างพื้นฐานระบบเครือข่ายองค์กร
+          ระบบเซิร์ฟเวอร์ Virtualization และ Cloud Infrastructure ควบคู่กับการวางระบบความมั่นคงปลอดภัยสารสนเทศ
+          และการกำกับดูแลตามมาตรฐาน ISO/IEC 27001:2022, ISMS และ PDPA รวมถึงการวางระบบป้องกันข้อมูลรั่วไหล (Safetica DLP)
+          และการบริหารงบประมาณไอทีประจำปี (CAPEX/OPEX)
+        </p>
+        <div class="cta-group">
+          <a href="#projects" class="btn btn-primary">ดูผลงานและโครงการสำคัญ</a>
+          <a href="#contact" class="btn btn-secondary">ช่องทางติดต่อ</a>
+        </div>
+      </div>
+
+      <!-- พื้นที่ใส่รูปโปรไฟล์ -->
+      <aside class="photo-card">
+        <div class="photo-frame">
+          <!-- วิธีใส่รูป: นำไฟล์รูป (เช่น profile.jpg) ไว้ในโฟลเดอร์เดียวกับ index.html แล้วเปิดใช้งานแท็ก <img> ด้านล่าง -->
+          <!-- <img src="profile.jpg" alt="รูปโปรไฟล์ เอกภพ พุฒทอง" /> -->
+          <div class="photo-placeholder">
+            <strong>พื้นที่ใส่รูปโปรไฟล์</strong><br />
+            วางไฟล์รูปใน Repo แล้วเปิดแท็ก &lt;img src="profile.jpg"&gt;
+          </div>
+        </div>
+        <div class="photo-caption">หนองจอก, กรุงเทพมหานคร</div>
+      </aside>
+    </section>
+
+    <!-- Key Projects -->
+    <section id="projects">
+      <h2 class="section-title">ผลงานและโครงการสำคัญ (Key Projects)</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Data Loss Prevention (DLP) Implementation</h3>
+          <p>วางระบบและกำหนดนโยบายป้องกันข้อมูลรั่วไหลด้วย Safetica DLP ครอบคลุมการควบคุมสิทธิ์เข้าถึงข้อมูลและการปฏิบัติตามข้อกำหนด PDPA</p>
+          <div class="tags">
+            <span class="tag">Safetica DLP</span>
+            <span class="tag">PDPA</span>
+            <span class="tag">Access Control</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Information Security &amp; Compliance (ISO/IEC 27001:2022)</h3>
+          <p>ร่วมจัดทำโครงสร้างเอกสาร นโยบายความมั่นคงปลอดภัยสารสนเทศ (ISMS), GPO Baseline Security และตรวจสอบ Log จากส่วนกลางผ่าน FortiAnalyzer / Syslog</p>
+          <div class="tags">
+            <span class="tag">ISO/IEC 27001:2022</span>
+            <span class="tag">ISMS</span>
+            <span class="tag">FortiAnalyzer</span>
+            <span class="tag">Syslog</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Enterprise Cloud Migration (Google Workspace → Microsoft 365)</h3>
+          <p>วางแผนและดำเนินการย้ายระบบอีเมลและบริการคลาวด์ระดับองค์กรสู่ Microsoft 365 พร้อมบริหารจัดการสิทธิ์ผ่าน M365 Admin Center</p>
+          <div class="tags">
+            <span class="tag">Microsoft 365</span>
+            <span class="tag">Cloud Migration</span>
+            <span class="tag">Identity &amp; Access</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Data Center &amp; Server Relocation</h3>
+          <p>บริหารจัดการการเคลื่อนย้ายโครงสร้างพื้นฐานเซิร์ฟเวอร์และอุปกรณ์ Data Center รวมถึงวางระบบ IoT-based Data Center Automation System</p>
+          <div class="tags">
+            <span class="tag">Data Center</span>
+            <span class="tag">Server Relocation</span>
+            <span class="tag">IoT Automation</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Enterprise Network Redesign &amp; Proactive Monitoring</h3>
+          <p>ปรับปรุงสถาปัตยกรรมเครือข่าย (LAN/WAN, Fiber Backbone, VLAN Segmentation, SD-WAN) พร้อมติดตั้งระบบ Proactive Automation Monitoring &amp; Alert และ Centralized Wireless Authentication</p>
+          <div class="tags">
+            <span class="tag">LAN/WAN</span>
+            <span class="tag">VLAN &amp; SD-WAN</span>
+            <span class="tag">Monitoring &amp; Alert</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Enterprise Backup &amp; Disaster Recovery Strategy</h3>
+          <p>ออกแบบระบบสำรองข้อมูลแบบ Local และ Off-site Cloud (Veeam Backup &amp; Replication, Wasabi S3, NAS) พร้อมทดสอบแผนกู้คืนระบบฉุกเฉิน (BCP/DRP)</p>
+          <div class="tags">
+            <span class="tag">Veeam</span>
+            <span class="tag">Wasabi S3</span>
+            <span class="tag">NAS</span>
+            <span class="tag">BCP / DRP</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2 class="section-title">ประสบการณ์การทำงาน (Experience)</h2>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="company">บริษัท ชิค รีพับบลิค จำกัด (มหาชน)</div>
+            <div class="role">IT Infrastructure Engineer (System, Network, Cloud, Server &amp; Virtualization)</div>
+          </div>
+          <span class="period">2569 – ปัจจุบัน</span>
+        </div>
+        <ul>
+          <li>บริหารจัดการระบบเซิร์ฟเวอร์และโครงสร้างพื้นฐาน (Windows Server, File Server, DNS/DHCP) รวมถึงระบบ Virtualization (VMware vSphere, Hyper-V) และ Cloud Infrastructure</li>
+          <li>ดูแลระบบสำรองข้อมูลส่วนกลาง (Enterprise Backup) และจัดทำ/ทดสอบแผนกู้คืนระบบฉุกเฉิน (DRP)</li>
+          <li>ออกแบบและดูแลระบบเครือข่ายองค์กร (LAN, WAN, VPN, Wi-Fi) กำหนดนโยบายความปลอดภัย (Firewall, Bitdefender Endpoint Protection) และตรวจสอบ Log เชิงรุกผ่าน FortiAnalyzer และ Syslog</li>
+          <li>ควบคุมบัญชีผู้ใช้และสิทธิ์การเข้าถึงผ่าน Active Directory และ Microsoft 365 ตามหลัก Least Privilege พร้อมอัปเดตเอกสารโครงสร้างระบบ (Network Diagram, Operational Procedures)</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="company">บริษัท พอช เมดิก้า ไลฟ์ เทค จำกัด (มหาชน)</div>
+            <div class="role">IT Supervisor / System Administrator &amp; Network Engineer</div>
+          </div>
+          <span class="period">2566 – 2569</span>
+        </div>
+        <ul>
+          <li>วางระบบและกำหนดนโยบายความปลอดภัยข้อมูล (Safetica DLP, Access Control, Local Admin Restriction, Least Privilege) ตรวจสอบ Log (FortiAnalyzer, Syslog) และร่วมจัดทำเอกสารตามมาตรฐาน ISO/IEC 27001:2022, ISMS, PDPA และ BCP/DRP</li>
+          <li>ออกแบบ ติดตั้ง และบำรุงรักษาระบบเครือข่าย (Switch, Access Point, Fiber Backbone, VLAN Segmentation) และบริหาร FortiGate NGFW (SD-WAN, Site-to-Site / Remote Access VPN, Policy, NAT)</li>
+          <li>ดูแล Windows Server, Active Directory, VMware/Hyper-V, Storage, Veeam Backup &amp; Replication, Wasabi S3, NAS และ Patch Management (WSUS/Intune) รวมถึงสนับสนุน Microsoft Dynamics 365 Business Central</li>
+          <li>กำหนด KPIs/SLA บริหารงานทีม IT Support วางแผน Timeline เจรจาต่อรองกับ Vendor (Bidding) และวางแผน IT Master Plan รวมถึงงบประมาณประจำปี (CAPEX/OPEX)</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="company">บริษัท ออกัสท์ ไทยเทค จำกัด</div>
+            <div class="role">IT Support Officer</div>
+          </div>
+          <span class="period">2562 – 2566</span>
+        </div>
+        <ul>
+          <li>วินิจฉัยและแก้ไขปัญหา Hardware, ระบบปฏิบัติการ Windows และระบบเครือข่ายภายในองค์กร พร้อมให้คำปรึกษาการใช้งานแก่ผู้ใช้งาน</li>
+          <li>ติดตั้งและบำรุงรักษาระบบคอมพิวเตอร์ จัดทำรายงาน Preventive Maintenance บริหารจัดการคลังทรัพย์สินไอที (IT Inventory) ประสานงานจัดซื้อกับ Service Provider รวมถึงงานสนับสนุนด้านสื่อนำเสนอและกราฟิกองค์กร</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2 class="section-title">ทักษะและความเชี่ยวชาญทางเทคนิค (Skills)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Security &amp; Compliance</h3>
+          <p>Safetica DLP, Fortinet (FortiGate NGFW, FortiAnalyzer), ISO/IEC 27001:2022, ISMS, PDPA, Bitdefender Endpoint Protection, Syslog Analysis, GPO Baseline Security</p>
+        </div>
+        <div class="card">
+          <h3>System, Cloud &amp; Backup</h3>
+          <p>Windows Server, Active Directory (DNS/DHCP/GPO), Microsoft 365 Admin Center, VMware vSphere, Hyper-V, Veeam Backup &amp; Replication, Wasabi S3, NAS Storage, WSUS / Intune, Microsoft Dynamics 365 Business Central</p>
+        </div>
+        <div class="card">
+          <h3>Network &amp; Infrastructure</h3>
+          <p>Cisco, Ubiquiti (LAN/Wireless), Fiber Backbone, VLAN Segmentation, SD-WAN, Site-to-Site &amp; Remote VPN, CCTV, IT Infrastructure Discovery &amp; Asset Mapping, ISP Coordination</p>
+        </div>
+        <div class="card">
+          <h3>IT Management &amp; Strategy</h3>
+          <p>IT Budgeting (CAPEX/OPEX), IT Master Plan, SLA &amp; KPI Management, Vendor Bidding &amp; Procurement, BCP / DRP Planning, Network &amp; System Documentation</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2 class="section-title">ประวัติการศึกษา (Education)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>หลักสูตรปริญญาตรี สาขาวิชาวิทยาการคอมพิวเตอร์</h3>
+          <p>มหาวิทยาลัยสุโขทัยธรรมาธิราช</p>
+          <div class="tags"><span class="tag">2567 – ปัจจุบัน (กำลังศึกษา)</span></div>
+        </div>
+        <div class="card">
+          <h3>ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) สาขาวิชาคอมพิวเตอร์ธุรกิจ</h3>
+          <p>วิทยาลัยอาชีวศึกษาเจริญพัฒนาบริหารธุรกิจ</p>
+          <div class="tags"><span class="tag">สำเร็จการศึกษา 2562</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <strong>ติดต่อ (Contact)</strong>
+      <div class="contact-row">
+        <span>อีเมล: <a href="mailto:Akapop.p1998@gmail.com">Akapop.p1998@gmail.com</a></span>
+        <span>พื้นที่: หนองจอก, กรุงเทพมหานคร 10530</span>
+        <!-- เพิ่มลิงก์ GitHub หรือ LinkedIn ของคุณเพิ่มเติมได้ที่นี่ -->
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+```[cite: 1, 2, 3, 4, 5]
+
+---
+
+### วิธีใส่รูปและอัปโหลดขึ้น GitHub Pages
+1. เตรียมรูปถ่ายหน้าตรงโทนสุภาพ ตั้งชื่อไฟล์ให้เรียกง่าย เช่น `profile.jpg` (สัดส่วนแนวตั้ง 3:4 จะเข้ากับกรอบพอดี)
+2. ในโค้ดส่วน `<!-- พื้นที่ใส่รูปโปรไฟล์ -->` ให้เอาเครื่องหมายคอมเมนต์ `<!--` และ `-->` ออกจากบรรทัด `<img src="profile.jpg" ... />`
+3. อัปโหลดไฟล์ `index.html` และ `profile.jpg` ขึ้น GitHub Repository (เช่น `<username>.github.io`) แล้วเปิดใช้งาน **Settings > Pages > Deploy from a branch (`main`)**
+
+ต้องการปรับโทนสี (เช่น โทนสว่างแบบเอกสาร/องค์กร) หรือเพิ่มส่วน Case Study เจาะลึกของโปรเจกต์ไหนเพิ่มเติมไหมครับ?
