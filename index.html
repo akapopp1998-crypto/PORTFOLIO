@@ -272,7 +272,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      padding: 28px 0 36px;
+      padding: 28px 0 28px;
       border-top: 1px solid var(--border);
     }
 
@@ -310,107 +310,68 @@
       line-height: 1.5;
     }
 
-    /* Live System Status Bar */
-    .live-status-wrap {
-      margin: 0 0 48px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 16px 20px;
+    /* Animated Status Datalink Divider */
+    .datalink-wrap {
+      padding: 6px 0 44px;
     }
 
-    .live-status-header {
+    .datalink-bar {
+      position: relative;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-bottom: 12px;
-      margin-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.78rem;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .live-badge {
+    .datalink-node {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #28a745;
+      color: var(--text-secondary);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 980px;
+      white-space: nowrap;
+      z-index: 2;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .live-badge { color: #32d74b; }
-    }
-
-    .live-pulse {
-      width: 8px;
-      height: 8px;
+    .datalink-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #34c759;
-      box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.6);
-      animation: liveRing 2s infinite;
+      box-shadow: 0 0 8px rgba(52, 199, 89, 0.7);
     }
 
-    @keyframes liveRing {
-      0% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.55); }
-      70% { box-shadow: 0 0 0 7px rgba(52, 199, 89, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+    .datalink-track {
+      position: relative;
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
     }
 
-    .live-meta {
-      color: var(--text-secondary);
-      font-variant-numeric: tabular-nums;
+    .datalink-pulse {
+      position: absolute;
+      top: 0;
+      left: -35%;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--accent), #34c759, transparent);
+      animation: datalinkFlow 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    .live-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .datalink-track.delay .datalink-pulse {
+      animation-delay: 1.3s;
     }
 
-    .live-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: transform 0.2s ease;
-    }
-
-    .live-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .live-item-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .live-item-sub {
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .live-tag {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #28a745;
-      background: rgba(52, 199, 89, 0.12);
-      padding: 2px 8px;
-      border-radius: 980px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .live-tag { color: #32d74b; }
+    @keyframes datalinkFlow {
+      0% { left: -35%; }
+      100% { left: 100%; }
     }
 
     /* Tech Stack Logo Showcase */
@@ -827,7 +788,7 @@
       .photo-wrapper { order: -1; }
       .photo-frame { max-width: 210px; }
       .metrics-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .live-grid { grid-template-columns: repeat(2, 1fr); }
+      .datalink-node.mid-node, .datalink-track.delay { display: none; }
       .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .arch-flow { grid-template-columns: 1fr; }
       .arch-arrow { transform: rotate(90deg); }
@@ -908,43 +869,25 @@
         </div>
       </div>
 
-      <!-- Live System Status Bar -->
-      <div class="live-status-wrap reveal">
-        <div class="live-status-header">
-          <div class="live-badge">
-            <span class="live-pulse"></span>
-            <span>ALL INFRASTRUCTURE &amp; SECURITY SYSTEMS ONLINE</span>
+      <!-- Animated Status Datalink -->
+      <div class="datalink-wrap reveal">
+        <div class="datalink-bar">
+          <div class="datalink-node">
+            <span class="datalink-dot"></span>
+            <span>INFRASTRUCTURE &amp; SD-WAN</span>
           </div>
-          <div class="live-meta">Telemetry: <span id="liveClock">Active</span> · SLA 99.9%</div>
-        </div>
-        <div class="live-grid">
-          <div class="live-item">
-            <div class="live-item-top">
-              <span>Core &amp; SD-WAN</span>
-              <span class="live-tag">Online</span>
-            </div>
-            <div class="live-item-sub">FortiGate · Latency <span id="latNet">4</span> ms</div>
+          <div class="datalink-track">
+            <div class="datalink-pulse"></div>
           </div>
-          <div class="live-item">
-            <div class="live-item-top">
-              <span>Safetica DLP</span>
-              <span class="live-tag">Protected</span>
-            </div>
-            <div class="live-item-sub">PDPA Policy · 200+ Endpoints</div>
+          <div class="datalink-node mid-node">
+            <span>SAFETICA DLP · ISO 27001</span>
           </div>
-          <div class="live-item">
-            <div class="live-item-top">
-              <span>3-2-1 Backup</span>
-              <span class="live-tag">Synced</span>
-            </div>
-            <div class="live-item-sub">Veeam + Wasabi S3 · Verified</div>
+          <div class="datalink-track delay">
+            <div class="datalink-pulse"></div>
           </div>
-          <div class="live-item">
-            <div class="live-item-top">
-              <span>Identity &amp; Audit</span>
-              <span class="live-tag">Compliant</span>
-            </div>
-            <div class="live-item-sub">AD / M365 · ISO 27001 / ITGC</div>
+          <div class="datalink-node">
+            <span class="datalink-dot"></span>
+            <span>DATALINK ONLINE · 99.9%</span>
           </div>
         </div>
       </div>
@@ -1375,21 +1318,7 @@
 
     if (metricsStrip) metricsObserver.observe(metricsStrip);
 
-    // 5. Ambient Live Telemetry Ticker
-    setInterval(() => {
-      const latEl = document.getElementById("latNet");
-      const clockEl = document.getElementById("liveClock");
-      if (latEl) {
-        const ms = Math.floor(Math.random() * 4) + 3;
-        latEl.textContent = ms;
-      }
-      if (clockEl) {
-        const now = new Date();
-        clockEl.textContent = "Heartbeat " + now.toLocaleTimeString("th-TH", { hour12: false });
-      }
-    }, 3000);
-
-    // 6. Active Navbar Highlight
+    // 5. Active Navbar Highlight
     const sections = document.querySelectorAll("section[id], div[id='stack'], footer[id='contact']");
     const navItems = document.querySelectorAll("#navLinks a");
 
