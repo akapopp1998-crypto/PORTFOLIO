@@ -256,11 +256,6 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .logo-tile.dark-tile {
-      background: #000000;
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
     .logo-tile:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
@@ -277,6 +272,12 @@
 
     .logo-tile img.zoom-lg { transform: scale(1.45); }
     .logo-tile img.zoom-md { transform: scale(1.22); }
+
+    /* กลับพื้นหลังสีดำของไฟล์ภาพให้เป็นพื้นหลังสีขาวกลืนกับกล่อง */
+    .invert-to-light {
+      filter: invert(1) hue-rotate(180deg);
+      mix-blend-mode: multiply;
+    }
 
     /* Section Bands */
     .band-alt { background: var(--bg-alt); }
@@ -408,11 +409,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-    }
-
-    .card-logo-badge.dark {
-      background: #000000;
-      border-color: rgba(255, 255, 255, 0.14);
     }
 
     .card-logo-badge img {
@@ -623,7 +619,7 @@
           <div class="logo-tile"><img src="safetica.png" alt="Safetica DLP" /></div>
           <div class="logo-tile"><img src="bitdefender.png" alt="Bitdefender" class="zoom-lg" /></div>
           <div class="logo-tile"><img src="cisco.png" alt="Cisco" /></div>
-          <div class="logo-tile dark-tile"><img src="ubi.png" alt="Ubiquiti Networks" class="zoom-md" /></div>
+          <div class="logo-tile"><img src="ubi.png" alt="Ubiquiti Networks" class="zoom-md invert-to-light" /></div>
           <div class="logo-tile"><img src="winserv.png" alt="Windows Server" class="zoom-lg" /></div>
           <div class="logo-tile"><img src="ms365.png" alt="Microsoft 365" class="zoom-md" /></div>
           <div class="logo-tile"><img src="sahrepoint.png" alt="SharePoint" class="zoom-lg" /></div>
@@ -721,7 +717,7 @@
             <div>
               <div class="card-logos">
                 <div class="card-logo-badge"><img src="cisco.png" alt="Cisco" /></div>
-                <div class="card-logo-badge dark"><img src="ubi.png" alt="Ubiquiti" /></div>
+                <div class="card-logo-badge"><img src="ubi.png" alt="Ubiquiti" class="invert-to-light" /></div>
                 <div class="card-logo-badge"><img src="fortinet.png" alt="Fortinet" class="zoom-lg" /></div>
               </div>
               <h3>Enterprise Network Redesign</h3>
