@@ -160,7 +160,7 @@
 
     .btn-link:hover { text-decoration: underline; }
 
-    /* Profile Photo Frame (Fixed - No gray bar) */
+    /* Profile Photo Frame */
     .photo-wrapper {
       display: flex;
       flex-direction: column;
@@ -247,16 +247,17 @@
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.07);
       border-radius: 16px;
-      height: 74px;
-      padding: 14px 18px;
+      height: 82px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .logo-tile.dark-tile {
-      background: #0b0d12;
+      background: #000000;
       border-color: rgba(255, 255, 255, 0.12);
     }
 
@@ -266,13 +267,16 @@
     }
 
     .logo-tile img {
-      max-width: 100%;
-      max-height: 36px;
+      max-width: 85%;
+      max-height: 44px;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
     }
+
+    .logo-tile img.zoom-lg { transform: scale(1.45); }
+    .logo-tile img.zoom-md { transform: scale(1.22); }
 
     /* Section Bands */
     .band-alt { background: var(--bg-alt); }
@@ -398,24 +402,27 @@
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 10px;
-      height: 36px;
+      height: 38px;
       padding: 6px 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .card-logo-badge.dark {
-      background: #0b0d12;
+      background: #000000;
       border-color: rgba(255, 255, 255, 0.14);
     }
 
     .card-logo-badge img {
-      height: 20px;
+      height: 22px;
       width: auto;
       max-width: 96px;
       object-fit: contain;
     }
+
+    .card-logo-badge img.zoom-lg { transform: scale(1.35); }
 
     .bento-card h3 {
       font-size: 1.1rem;
@@ -612,14 +619,14 @@
       <div class="container">
         <div class="logo-heading">Enterprise Technologies &amp; Security Ecosystem</div>
         <div class="logo-grid">
-          <div class="logo-tile"><img src="fortinet.png" alt="Fortinet" /></div>
+          <div class="logo-tile"><img src="fortinet.png" alt="Fortinet" class="zoom-lg" /></div>
           <div class="logo-tile"><img src="safetica.png" alt="Safetica DLP" /></div>
-          <div class="logo-tile"><img src="bitdefender.png" alt="Bitdefender" /></div>
+          <div class="logo-tile"><img src="bitdefender.png" alt="Bitdefender" class="zoom-lg" /></div>
           <div class="logo-tile"><img src="cisco.png" alt="Cisco" /></div>
-          <div class="logo-tile dark-tile"><img src="ubi.png" alt="Ubiquiti Networks" /></div>
-          <div class="logo-tile"><img src="winserv.png" alt="Windows Server" /></div>
-          <div class="logo-tile"><img src="ms365.png" alt="Microsoft 365" /></div>
-          <div class="logo-tile"><img src="sahrepoint.png" alt="SharePoint" /></div>
+          <div class="logo-tile dark-tile"><img src="ubi.png" alt="Ubiquiti Networks" class="zoom-md" /></div>
+          <div class="logo-tile"><img src="winserv.png" alt="Windows Server" class="zoom-lg" /></div>
+          <div class="logo-tile"><img src="ms365.png" alt="Microsoft 365" class="zoom-md" /></div>
+          <div class="logo-tile"><img src="sahrepoint.png" alt="SharePoint" class="zoom-lg" /></div>
           <div class="logo-tile"><img src="veeam.png" alt="Veeam Backup" /></div>
           <div class="logo-tile"><img src="ggw.png" alt="Google Workspace" /></div>
         </div>
@@ -664,7 +671,7 @@
             <div>
               <div class="card-logos">
                 <div class="card-logo-badge"><img src="safetica.png" alt="Safetica" /></div>
-                <div class="card-logo-badge"><img src="bitdefender.png" alt="Bitdefender" /></div>
+                <div class="card-logo-badge"><img src="bitdefender.png" alt="Bitdefender" class="zoom-lg" /></div>
               </div>
               <h3>Data Loss Prevention (DLP) Implementation</h3>
               <p>วางระบบและกำหนดนโยบายป้องกันข้อมูลรั่วไหลด้วย Safetica DLP ครอบคลุมการควบคุมสิทธิ์เข้าถึงข้อมูลและการปฏิบัติตามข้อกำหนด PDPA</p>
@@ -679,8 +686,8 @@
           <article class="bento-card">
             <div>
               <div class="card-logos">
-                <div class="card-logo-badge"><img src="fortinet.png" alt="Fortinet" /></div>
-                <div class="card-logo-badge"><img src="winserv.png" alt="Windows Server" /></div>
+                <div class="card-logo-badge"><img src="fortinet.png" alt="Fortinet" class="zoom-lg" /></div>
+                <div class="card-logo-badge"><img src="winserv.png" alt="Windows Server" class="zoom-lg" /></div>
               </div>
               <h3>Information Security &amp; Compliance</h3>
               <p>ร่วมจัดทำโครงสร้างเอกสาร นโยบายความมั่นคงปลอดภัยสารสนเทศ (ISMS) ตามมาตรฐาน ISO/IEC 27001:2022, GPO Baseline Security และตรวจสอบ Log จากส่วนกลาง</p>
@@ -698,7 +705,7 @@
               <div class="card-logos">
                 <div class="card-logo-badge"><img src="ggw.png" alt="Google Workspace" /></div>
                 <div class="card-logo-badge"><img src="ms365.png" alt="Microsoft 365" /></div>
-                <div class="card-logo-badge"><img src="sahrepoint.png" alt="SharePoint" /></div>
+                <div class="card-logo-badge"><img src="sahrepoint.png" alt="SharePoint" class="zoom-lg" /></div>
               </div>
               <h3>Enterprise Cloud Migration</h3>
               <p>วางแผนและดำเนินการย้ายระบบอีเมลและบริการคลาวด์ระดับองค์กรจาก Google Workspace สู่ Microsoft 365 และ SharePoint พร้อมบริหารสิทธิ์ผ่าน M365 Admin Center</p>
@@ -714,8 +721,8 @@
             <div>
               <div class="card-logos">
                 <div class="card-logo-badge"><img src="cisco.png" alt="Cisco" /></div>
-                <div class="card-logo-badge dark"><img src="ubi.jpg" alt="Ubiquiti" /></div>
-                <div class="card-logo-badge"><img src="fortinet.png" alt="Fortinet" /></div>
+                <div class="card-logo-badge dark"><img src="ubi.png" alt="Ubiquiti" /></div>
+                <div class="card-logo-badge"><img src="fortinet.png" alt="Fortinet" class="zoom-lg" /></div>
               </div>
               <h3>Enterprise Network Redesign</h3>
               <p>ปรับปรุงสถาปัตยกรรมเครือข่าย (LAN/WAN, Fiber Backbone, VLAN Segmentation, SD-WAN) พร้อมติดตั้ง Proactive Automation Monitoring &amp; Alert</p>
@@ -731,7 +738,7 @@
             <div>
               <div class="card-logos">
                 <div class="card-logo-badge"><img src="veeam.png" alt="Veeam" /></div>
-                <div class="card-logo-badge"><img src="winserv.png" alt="Windows Server" /></div>
+                <div class="card-logo-badge"><img src="winserv.png" alt="Windows Server" class="zoom-lg" /></div>
               </div>
               <h3>Backup &amp; Disaster Recovery Strategy</h3>
               <p>ออกแบบระบบสำรองข้อมูลแบบ Local และ Off-site Cloud (Veeam Backup &amp; Replication, Wasabi S3, NAS) พร้อมทดสอบแผนกู้คืนระบบฉุกเฉิน (BCP/DRP)</p>
@@ -747,7 +754,7 @@
           <article class="bento-card">
             <div>
               <div class="card-logos">
-                <div class="card-logo-badge"><img src="winserv.png" alt="Server Infrastructure" /></div>
+                <div class="card-logo-badge"><img src="winserv.png" alt="Server Infrastructure" class="zoom-lg" /></div>
               </div>
               <h3>Data Center &amp; Server Relocation</h3>
               <p>บริหารจัดการการเคลื่อนย้ายโครงสร้างพื้นฐานเซิร์ฟเวอร์และอุปกรณ์ Data Center รวมถึงวางระบบ IoT-based Data Center Automation System</p>
